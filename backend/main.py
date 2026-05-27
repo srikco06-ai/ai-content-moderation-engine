@@ -5,8 +5,19 @@ from detoxify import Detoxify
 
 app = FastAPI()
 
-# Load model once at startup
-model = Detoxify("original")
+# Lazy-loaded model
+model = None
+
+
+def get_model():
+    global model
+
+    if model is None:
+        print("Loading Detoxify model...")
+        model = Detoxify("original")
+
+    return model
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -30,6 +41,7 @@ CATEGORY_MAP = {
     "identity_attack": "Identity Hate",
 }
 
+
 RISK_WEIGHTS = {
     "toxic": 20,
     "severe_toxic": 25,
@@ -39,12 +51,15 @@ RISK_WEIGHTS = {
     "identity_attack": 20,
 }
 
+
 THRESHOLD = 0.5
 
 
 @app.get("/")
 def home():
-    return {"message": "AI Content Moderation API Running"}
+    return {
+        "message": "AI Content Moderation API Running"
+    }
 
 
 @app.post("/predict")
@@ -61,10 +76,10 @@ def predict(data: TextInput):
             "raw_predictions": {},
         }
 
-    # ML inference
-    predictions = model.predict(text)
+    moderation_model = get_model()
 
-    # numpy.float32 -> Python float
+    predictions = moderation_model.predict(text)
+
     cleaned_predictions = {
         key: float(value)
         for key, value in predictions.items()
@@ -84,7 +99,6 @@ def predict(data: TextInput):
 
     label = "Toxic" if categories else "Safe"
 
-    # Correct confidence logic
     if label == "Toxic":
         confidence = round(max_score * 100, 2)
     else:
