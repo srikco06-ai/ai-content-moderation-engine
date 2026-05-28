@@ -5,19 +5,9 @@ from detoxify import Detoxify
 
 app = FastAPI()
 
-# Lazy-loaded model
-model = None
-
-
-def get_model():
-    global model
-
-    if model is None:
-        print("Loading Detoxify model...")
-        model = Detoxify("original")
-
-    return model
-
+# Preload model at startup
+print("Loading Detoxify model...")
+model = Detoxify("original")
 
 app.add_middleware(
     CORSMiddleware,
@@ -76,9 +66,7 @@ def predict(data: TextInput):
             "raw_predictions": {},
         }
 
-    moderation_model = get_model()
-
-    predictions = moderation_model.predict(text)
+    predictions = model.predict(text)
 
     cleaned_predictions = {
         key: float(value)
@@ -115,6 +103,4 @@ def predict(data: TextInput):
         "confidence": confidence,
         "risk_score": int(risk_score),
         "matched_words": [],
-        "categories": categories,
-        "raw_predictions": raw_predictions,
-    }
+        "categories":
