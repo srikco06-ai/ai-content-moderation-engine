@@ -43,19 +43,19 @@ function sanitizeHistory(data: unknown): HistoryItem[] {
 
 export default function Home() {
   // HYDRATION SAFE
-  const [mounted, setMounted] = useState(false);
+ const [text, setText] = useState("");
 
-  const [text, setText] = useState("");
-  const [result, setResult] =
-    useState<Prediction | null>(null);
-  const [loading, setLoading] =
-    useState(false);
-  const [history, setHistory] =
-    useState<HistoryItem[]>([]);
+const [result, setResult] =
+  useState<Prediction | null>(null);
 
-  // Load localStorage only on client
-  useEffect(() => {
-    setMounted(true);
+const [loading, setLoading] =
+  useState(false);
+
+const [history, setHistory] =
+  useState<HistoryItem[]>(() => {
+    if (typeof window === "undefined") {
+      return [];
+    }
 
     try {
       const saved =
@@ -63,28 +63,25 @@ export default function Home() {
           STORAGE_KEY
         );
 
-      if (!saved) return;
+      if (!saved) {
+        return [];
+      }
 
-      const parsed =
-        JSON.parse(saved);
-
-      setHistory(
-        sanitizeHistory(parsed)
+      return sanitizeHistory(
+        JSON.parse(saved)
       );
     } catch {
-      setHistory([]);
+      return [];
     }
-  }, []);
+  });
 
-  // Save history
-  useEffect(() => {
-    if (!mounted) return;
+useEffect(() => {
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(history)
+  );
+}, [history]);
 
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(history)
-    );
-  }, [history, mounted]);
 
   const checkContent =
     async () => {
@@ -256,11 +253,6 @@ export default function Home() {
         result.risk_score
       )
     : null;
-
-  // Prevent SSR mismatch
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <main className="min-h-screen bg-slate-100 p-6">
