@@ -1,22 +1,36 @@
 # AI Content Moderation Engine
 
-A full-stack content moderation application that analyzes user-submitted text, detects potentially toxic language, assigns risk scores, categorizes harmful content, and maintains moderation history.
+A full-stack AI-powered content moderation application that analyzes user-submitted text, detects potentially toxic language, assigns risk scores, categorizes harmful content, and maintains moderation history.
 
 ## Live Demo
 
-**Frontend Application**
-https://ai-content-moderation-engine-production-aa71.up.railway.app/
+### Frontend Application
 
-**Backend API Documentation**
-https://ai-content-moderation-engine-production.up.railway.app/docs
+[Live Demo](https://ai-content-moderation-engine-production-aa71.up.railway.app/)
+
+### Backend API Documentation
+
+[API Documentation](https://ai-content-moderation-engine-production.up.railway.app/docs)
+
+### GitHub Repository
+
+[GitHub Repository](https://github.com/srikco06-ai/ai-content-moderation-engine)
 
 ---
 
 ## Overview
 
-The AI Content Moderation Engine is a web application designed to identify potentially harmful or toxic text in real time. Users can submit text through a modern web interface and receive moderation results including toxicity classification, confidence score, risk score, and content category.
+The AI Content Moderation Engine is a production-deployed full-stack web application designed to identify potentially harmful or toxic text in real time.
 
-The project demonstrates full-stack development, API integration, cloud deployment, and frontend-backend communication using modern web technologies.
+Users can submit text through a modern web interface and receive moderation results including:
+
+* Toxicity classification
+* Confidence score
+* Risk score
+* Category detection
+* Moderation history tracking
+
+The project demonstrates frontend-backend integration, REST API development, cloud deployment, and modern full-stack engineering practices.
 
 ---
 
@@ -30,6 +44,7 @@ The project demonstrates full-stack development, API integration, cloud deployme
 * Analysis statistics dashboard
 * REST API backend
 * Public cloud deployment
+* Interactive API documentation
 
 ---
 
@@ -56,17 +71,29 @@ The project demonstrates full-stack development, API integration, cloud deployme
 
 ---
 
-## Project Architecture
+## System Architecture
 
-Frontend (Next.js)
-↓
-REST API
-↓
+```text
+User Browser
+      │
+      ▼
+Next.js Frontend
+      │
+      ▼
+REST API Request
+      │
+      ▼
 FastAPI Backend
-↓
-Moderation Engine
-↓
+      │
+      ▼
+Content Moderation Engine
+      │
+      ▼
 Risk Analysis & Categorization
+      │
+      ▼
+JSON Response
+```
 
 ---
 
@@ -92,7 +119,7 @@ Risk Analysis & Categorization
 
 ## Running Locally
 
-### Backend
+### Backend Setup
 
 ```bash
 cd backend
@@ -100,13 +127,13 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-Backend runs at:
+Backend URL:
 
 ```text
 http://localhost:8000
 ```
 
-### Frontend
+### Frontend Setup
 
 ```bash
 cd frontend
@@ -114,7 +141,7 @@ npm install
 npm run dev
 ```
 
-Frontend runs at:
+Frontend URL:
 
 ```text
 http://localhost:3000
@@ -122,9 +149,9 @@ http://localhost:3000
 
 ---
 
-## API Example
+## API Usage Example
 
-### Request
+### API Request Example
 
 ```json
 {
@@ -132,15 +159,19 @@ http://localhost:3000
 }
 ```
 
-### Response
+### API Response Example
 
 ```json
 {
   "label": "Toxic",
   "confidence": 66,
   "risk_score": 20,
-  "matched_words": ["stupid"],
-  "categories": ["Insult"]
+  "matched_words": [
+    "stupid"
+  ],
+  "categories": [
+    "Insult"
+  ]
 }
 ```
 
@@ -156,17 +187,21 @@ http://localhost:3000
 * Git & GitHub Workflow
 * TypeScript Development
 * Python Backend Development
+* Application Deployment
+* Software Documentation
 
 ---
 
 ## Future Enhancements
 
-* Advanced NLP models
+* Transformer-based NLP moderation models
 * User authentication
 * Admin moderation dashboard
 * Analytics reporting
 * Multi-language support
 * Database persistence
+* Export moderation reports
+* Dark mode support
 
 ---
 
@@ -174,4 +209,6 @@ http://localhost:3000
 
 Sri Krishna Chaitanya
 
-GitHub: https://github.com/srikco06-ai
+GitHub: [srikco06-ai](https://github.com/srikco06-ai)
+
+LinkedIn: Add your LinkedIn profile URL here
