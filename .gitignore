@@ -1,17 +1,25 @@
 # Python
+backend/.venv/
 backend/venv/
+.venv/
+venv/
+
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
 
 # Next.js
+node_modules/
 frontend/node_modules/
+
+.next/
 frontend/.next/
 
 # Environment
 .env
 .env.local
+.env.*
+!*.env.example
 frontend/.env.local
 
 # IDE
