@@ -1,6 +1,7 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+
+from app.schemas import TextInput
 
 app = FastAPI()
 
@@ -11,10 +12,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-class TextInput(BaseModel):
-    text: str
 
 
 TOXIC_WORDS = {
