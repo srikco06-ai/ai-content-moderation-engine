@@ -1,26 +1,58 @@
-# Python
-backend/.venv/
-backend/venv/
-.venv/
-venv/
+# =====================================================
+# AI Content Moderation Engine
+# Repository Git Ignore
+# =====================================================
 
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 
-# Next.js
-node_modules/
-frontend/node_modules/
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+backend/.venv/
+backend/venv/
 
-.next/
-frontend/.next/
+# Python caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
-# Environment
+# Environment files
 .env
-.env.local
 .env.*
-!*.env.example
-frontend/.env.local
+!.env.example
+!**/.env.example
+
+# Python build
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Machine Learning
+*.pt
+*.pth
+*.bin
+*.ckpt
+*.onnx
+*.h5
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Coverage
+.coverage
+coverage/
+htmlcov/
 
 # IDE
 .vscode/
@@ -29,13 +61,7 @@ frontend/.env.local
 # OS
 .DS_Store
 Thumbs.db
+Desktop.ini
 
 # TypeScript
 *.tsbuildinfo
-
-# Logs
-*.log
-
-# ML artifacts
-*.pt
-*.bin

@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.config import settings
 from app.schemas import (
     HealthResponse,
     PredictionResponse,
@@ -8,22 +9,23 @@ from app.schemas import (
 )
 from app.services import predict_text
 
+
 app = FastAPI(
-    title="AI Content Moderation API",
+    title=settings.APP_NAME,
     description=(
         "Production-ready REST API for AI-powered content moderation. "
         "Detects toxic, abusive, hateful, and offensive text using "
         "machine learning and rule-based analysis."
     ),
-    version="1.0.0",
+    version=settings.APP_VERSION,
 )
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=settings.ALLOW_ORIGINS,
+    allow_credentials=settings.ALLOW_CREDENTIALS,
+    allow_methods=settings.ALLOW_METHODS,
+    allow_headers=settings.ALLOW_HEADERS,
 )
 
 
@@ -34,7 +36,7 @@ app.add_middleware(
 )
 def home():
     return {
-        "message": "AI Content Moderation API Running"
+        "message": f"{settings.APP_NAME} Running"
     }
 
 
@@ -48,7 +50,7 @@ def health():
     return {
         "status": "healthy",
         "service_ready": True,
-        "version": "1.0.0",
+        "version": settings.APP_VERSION,
     }
 
 
