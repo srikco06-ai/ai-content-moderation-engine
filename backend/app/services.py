@@ -17,22 +17,10 @@ TOXIC_WORDS = {
 
 def predict_text(data: TextInput) -> dict:
     """
-    Perform keyword-based content moderation.
-
-    Returns the same response schema currently exposed by the API.
+    Simple keyword-based moderation engine.
     """
 
     text = data.text.strip().lower()
-
-    if not text:
-        return {
-            "label": "Safe",
-            "confidence": 100.0,
-            "risk_score": 0,
-            "matched_words": [],
-            "categories": [],
-            "raw_predictions": {},
-        }
 
     matched_words = []
     categories = []
@@ -49,17 +37,17 @@ def predict_text(data: TextInput) -> dict:
 
     risk_score = min(risk_score, 100)
 
-    if risk_score > 0:
-        label = "Toxic"
-        confidence = min(95.0, 60 + risk_score * 0.3)
-    else:
-        label = "Safe"
+    if risk_score == 0:
+        prediction = "Safe"
         confidence = 99.0
+    else:
+        prediction = "Toxic"
+        confidence = min(95.0, 60 + risk_score * 0.3)
 
     return {
-        "label": label,
+        "prediction": prediction,
         "confidence": round(confidence, 2),
-        "risk_score": risk_score,
+        "risk_score": float(risk_score),
         "matched_words": matched_words,
         "categories": categories,
         "raw_predictions": {},

@@ -1,5 +1,67 @@
-from pydantic import BaseModel
+from typing import Any
+
+from pydantic import BaseModel, Field
 
 
 class TextInput(BaseModel):
-    text: str
+    text: str = Field(
+        ...,
+        min_length=1,
+        description="Text content to analyze for toxicity.",
+    )
+
+
+class PredictionResponse(BaseModel):
+    prediction: str = Field(
+        ...,
+        description="Overall moderation prediction.",
+    )
+
+    confidence: float = Field(
+        ...,
+        description="Prediction confidence percentage.",
+    )
+
+    risk_score: float = Field(
+        ...,
+        description="Overall calculated risk score.",
+    )
+
+    matched_words: list[str] = Field(
+        default_factory=list,
+        description="Matched toxic words detected in the input.",
+    )
+
+    categories: list[str] = Field(
+        default_factory=list,
+        description="Detected moderation categories.",
+    )
+
+    raw_predictions: dict[str, Any] = Field(
+        default_factory=dict,
+        description="Raw prediction values.",
+    )
+
+
+class HealthResponse(BaseModel):
+    status: str = Field(
+        ...,
+        description="Application health status.",
+    )
+
+    service_ready: bool = Field(
+        ...,
+        description="Whether the moderation service is ready.",
+    )
+
+    version: str = Field(
+        ...,
+        description="Current API version.",
+    )
+
+
+class ErrorResponse(BaseModel):
+    detail: str = Field(
+        ...,
+        description="Error message.",
+    )
