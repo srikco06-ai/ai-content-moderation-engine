@@ -2,12 +2,19 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
+from app.logging_config import configure_logging, get_logger
 from app.schemas import (
     HealthResponse,
     PredictionResponse,
     TextInput,
 )
 from app.services import predict_text
+
+
+# Configure logging before creating the application.
+configure_logging()
+
+logger = get_logger(__name__)
 
 
 app = FastAPI(
@@ -18,6 +25,12 @@ app = FastAPI(
         "machine learning and rule-based analysis."
     ),
     version=settings.APP_VERSION,
+)
+
+logger.info(
+    "Application initialized | name=%s version=%s",
+    settings.APP_NAME,
+    settings.APP_VERSION,
 )
 
 app.add_middleware(
@@ -35,6 +48,8 @@ app.add_middleware(
     summary="API Status",
 )
 def home():
+    logger.debug("Root endpoint requested.")
+
     return {
         "message": f"{settings.APP_NAME} Running"
     }
@@ -47,6 +62,8 @@ def home():
     summary="Health Check",
 )
 def health():
+    logger.debug("Health check requested.")
+
     return {
         "status": "healthy",
         "service_ready": True,
@@ -61,4 +78,18 @@ def health():
     summary="Analyze Text",
 )
 def predict(data: TextInput):
-    return predict_text(data)
+    logger.info(
+        "Prediction request received | text_length=%d",
+        len(data.text),
+    )
+
+    result = predict_text(data)
+
+    logger.info(
+        "Prediction completed | prediction=%s risk_score=%.2f",
+        result["prediction"],
+        result["risk_score"],
+        len(result["matched_words"]),
+    )
+
+    return result
