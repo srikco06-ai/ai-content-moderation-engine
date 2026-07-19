@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
+from app.exception_handlers import register_exception_handlers
 from app.logging_config import configure_logging, get_logger
 from app.schemas import (
     HealthResponse,
@@ -11,7 +12,6 @@ from app.schemas import (
 from app.services import predict_text
 
 
-# Configure logging before creating the application.
 configure_logging()
 
 logger = get_logger(__name__)
@@ -40,6 +40,8 @@ app.add_middleware(
     allow_methods=settings.ALLOW_METHODS,
     allow_headers=settings.ALLOW_HEADERS,
 )
+
+register_exception_handlers(app)
 
 
 @app.get(
@@ -86,7 +88,7 @@ def predict(data: TextInput):
     result = predict_text(data)
 
     logger.info(
-        "Prediction completed | prediction=%s risk_score=%.2f",
+        "Prediction completed | prediction=%s risk_score=%.2f matches=%d",
         result["prediction"],
         result["risk_score"],
         len(result["matched_words"]),
