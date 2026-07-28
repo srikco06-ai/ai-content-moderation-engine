@@ -15,12 +15,11 @@ export default function Navbar({
     <header
       className={[
         "sticky top-0 z-50",
-        "border-b border-slate-200/80",
-        "bg-white/80",
-        "backdrop-blur-xl",
-        "supports-[backdrop-filter]:bg-white/70",
-        "dark:border-slate-800",
-        "dark:bg-slate-950/80",
+        "border-b border-slate-200/70",
+        "bg-white/75",
+        "backdrop-blur-2xl",
+        "supports-backdrop-filter:bg-white/65",
+        "shadow-sm",
         className,
       ].join(" ")}
     >
@@ -34,10 +33,30 @@ export default function Navbar({
         {/* Right Actions */}
         <div className="flex items-center gap-3">
           <a
-            href="https://github.com"
+            href="https://github.com/srikco06-ai/ai-content-moderation-engine"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white md:inline-flex"
+            className="
+              hidden
+              items-center
+              rounded-xl
+              border
+              border-slate-200
+              bg-white
+              px-4
+              py-2
+              text-sm
+              font-semibold
+              text-slate-700
+              shadow-sm
+              transition-all
+              duration-200
+              hover:-translate-y-0.5
+              hover:border-blue-200
+              hover:text-blue-600
+              hover:shadow-md
+              md:inline-flex
+            "
           >
             GitHub
           </a>

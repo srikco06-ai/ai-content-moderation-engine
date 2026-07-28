@@ -276,7 +276,7 @@ export default function HistoryTable({
                   </span>
                 </div>
 
-                <p className="mb-4 line-clamp-4 break-words text-sm text-slate-700">
+                <p className="mb-4 line-clamp-4 wrap-break-word text-sm text-slate-700">
                   {item.text}
                 </p>
 
@@ -380,7 +380,7 @@ export default function HistoryTable({
                       className="border-t transition-colors hover:bg-slate-50"
                     >
                       <td className="max-w-sm px-4 py-4 align-top">
-                        <div className="line-clamp-3 break-words">
+                        <div className="line-clamp-3 wrap-break-word">
                           {item.text}
                         </div>
                       </td>

@@ -68,6 +68,7 @@ export default function ModerationForm({
 
   return (
     <Card
+      id="moderation"
       padding="lg"
       shadow="lg"
       rounded="2xl"

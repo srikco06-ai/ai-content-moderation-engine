@@ -1,137 +1,146 @@
 # AI Content Moderation Engine
 
-A full-stack AI-powered content moderation application that analyzes user-submitted text, detects potentially toxic language, assigns risk scores, categorizes harmful content, and maintains moderation history.
+> Production-ready AI-powered content moderation platform built with **Next.js 16**, **React 19**, **FastAPI**, **TypeScript**, and **Python**.
 
-## Live Demo
-
-### Frontend Application
-
-[Live Demo](https://ai-content-moderation-engine-production-aa71.up.railway.app/)
-
-### Backend API Documentation
-
-[API Documentation](https://ai-content-moderation-engine-production.up.railway.app/docs)
-
-### GitHub Repository
-
-[GitHub Repository](https://github.com/srikco06-ai/ai-content-moderation-engine)
+![Next.js](https://img.shields.io/badge/Next.js-16-black)
+![React](https://img.shields.io/badge/React-19-61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Latest-009688)
+![Python](https://img.shields.io/badge/Python-3.12+-3776AB)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
 ## Overview
 
-The AI Content Moderation Engine is a production-deployed full-stack web application designed to identify potentially harmful or toxic text in real time.
+AI Content Moderation Engine is a full-stack AI application that analyses user-submitted text and identifies potentially harmful or unsafe content.
 
-Users can submit text through a modern web interface and receive moderation results including:
+The project combines a modern **Next.js** frontend with a **FastAPI** backend to provide real-time moderation results through a clean, responsive, and production-ready interface.
 
-* Toxicity classification
-* Confidence score
-* Risk score
-* Category detection
-* Moderation history tracking
+Predictions include:
 
-The project demonstrates frontend-backend integration, REST API development, cloud deployment, and modern full-stack engineering practices.
-
----
-
-## Features
-
-* Real-time text moderation
-* Toxic vs Safe classification
-* Risk scoring system (0–100)
-* Content categorization
-* Moderation history tracking
-* Analysis statistics dashboard
-* REST API backend
-* Public cloud deployment
-* Interactive API documentation
+- Safe vs Toxic classification
+- Confidence score
+- Risk score
+- Moderation categories
+- Matched keywords
+- Structured API responses
+- Moderation history
 
 ---
 
-## Tech Stack
+## Features for both
 
 ### Frontend
 
-* Next.js 16
-* React 19
-* TypeScript
-* Tailwind CSS
+- Responsive dashboard
+- Real-time moderation
+- Modern UI with Tailwind CSS
+- Search and filtering
+- CSV export
+- Loading and error states
 
 ### Backend
 
-* FastAPI
-* Python
-* Pydantic
+- FastAPI REST API
+- AI-powered moderation
+- Request validation
+- Health check endpoint
+- OpenAPI documentation
+- Swagger UI
 
-### Deployment & DevOps
+---
 
-* Railway
-* GitHub
-* Git
+## Technology Stack
+
+| Layer | Technology |
+| ----- | ---------- |
+| Frontend | Next.js 16, React 19, TypeScript, Tailwind CSS |
+| Backend | FastAPI, Python, Pydantic, Uvicorn |
+| AI | Machine Learning Moderation Engine |
+| Tools | Git, GitHub, npm, pip |
 
 ---
 
 ## System Architecture
 
 ```text
-User Browser
-      │
-      ▼
-Next.js Frontend
-      │
-      ▼
-REST API Request
-      │
-      ▼
-FastAPI Backend
-      │
-      ▼
-Content Moderation Engine
-      │
-      ▼
-Risk Analysis & Categorization
-      │
-      ▼
-JSON Response
+                User
+                  │
+                  ▼
+         Next.js + React
+                  │
+             REST API
+                  │
+                  ▼
+            FastAPI Backend
+                  │
+          AI Moderation Engine
+                  │
+                  ▼
+           JSON API Response
 ```
 
 ---
 
-## Screenshots
+## Repository Structure
 
-### Homepage
-
-![Homepage](screenshots/homepage.png)
-
-### Toxic Content Detection
-
-![Toxic Example](screenshots/toxic-example.png)
-
-### Safe Content Detection
-
-![Safe Example](screenshots/safe-example.png)
-
-### API Documentation
-
-![API Docs](screenshots/api-docs.png)
+```text
+ai-content-moderation-engine/
+├── frontend/
+├── backend/
+├── screenshots/
+├── .github/
+├── LICENSE
+└── README.md
+```
 
 ---
 
-## Running Locally
+## Getting Started
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/<your-username>/ai-content-moderation-engine.git
+
+cd ai-content-moderation-engine
+```
 
 ### Backend Setup
 
 ```bash
 cd backend
+python -m venv .venv
+```
+
+Activate the virtual environment.
+
+### Windows
+
+```bash
+.venv\Scripts\activate
+```
+
+### macOS / Linux
+
+```bash
+source .venv/bin/activate
+```
+
+Install dependencies.
+
+```bash
 pip install -r requirements.txt
-uvicorn main:app --reload
 ```
 
-Backend URL:
+Run the backend.
 
-```text
-http://localhost:8000
+```bash
+uvicorn app.main:app --reload
 ```
+
+---
 
 ### Frontend Setup
 
@@ -141,74 +150,74 @@ npm install
 npm run dev
 ```
 
-Frontend URL:
+Create a `.env.local` file.
 
-```text
-http://localhost:3000
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
 
 ---
 
-## API Usage Example
+## API Endpoints
 
-### API Request Example
-
-```json
-{
-  "text": "stupid app"
-}
-```
-
-### API Response Example
-
-```json
-{
-  "label": "Toxic",
-  "confidence": 66,
-  "risk_score": 20,
-  "matched_words": [
-    "stupid"
-  ],
-  "categories": [
-    "Insult"
-  ]
-}
-```
+| Method | Endpoint | Description |
+| ------ | -------- | ----------- |
+| GET | `/` | API information |
+| GET | `/health` | Health check |
+| POST | `/predict` | Analyse submitted text |
 
 ---
 
-## Skills Demonstrated
+## Deployment
 
-* Full-Stack Development
-* REST FastAPI Backend
-* Frontend-Backend Integration
-* Cloud Deployment
-* API Testing
-* Git & GitHub Workflow
-* TypeScript Development
-* Python Backend Development
-* Application Deployment
-* Software Documentation
+| Component | Platform |
+|-----------|----------|
+| Frontend  | Vercel   |
+| Backend   | Render   |
 
 ---
 
-## Future Enhancements
+## Project Structure
 
-* Transformer-based NLP moderation models
-* User authentication
-* Admin moderation dashboard
-* Analytics reporting
-* Multi-language support
-* Database persistence
-* Export moderation reports
-* Dark mode support
+This repository contains three main parts:
+
+- **Frontend** – Next.js application
+- **Backend** – FastAPI REST API
+- **Documentation** – Project guides and setup instructions
+
+For more details, see:
+
+- [`frontend/README.md`](frontend/README.md)
+- [`backend/README.md`](backend/README.md)
 
 ---
 
-## Author
+## Roadmap
 
-Sri Krishna Chaitanya
+Future enhancements include:
 
-GitHub: [srikco06-ai](https://github.com/srikco06-ai)
+- User authentication
+- Database integration
+- Persistent moderation history
+- Image moderation
+- Multi-language support
+- Analytics dashboard
+- Docker support
+- CI/CD pipeline
 
-LinkedIn: Add your LinkedIn profile URL here
+---
+
+## Contributing
+
+Contributions, suggestions, and improvements are welcome.
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Commit your changes.
+4. Open a Pull Request.
+
+---
+
+## License
+
+This project is licensed under the **MIT License**.
