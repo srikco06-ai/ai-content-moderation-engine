@@ -180,7 +180,7 @@ http://localhost:3000
 ## Skills Demonstrated
 
 * Full-Stack Development
-* REST API Design
+* REST FastAPI Backend
 * Frontend-Backend Integration
 * Cloud Deployment
 * API Testing
