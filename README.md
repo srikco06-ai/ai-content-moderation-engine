@@ -1,27 +1,35 @@
 # AI Content Moderation Engine
 
-> **Production-ready AI-powered content moderation platform built with FastAPI, Next.js, React, TypeScript, and Hugging Face ToxicBERT.**
+[![Python](https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/badge/License-MIT-success.svg)](LICENSE)
 
-![Python](https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)
-![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.13-EE4C2C?logo=pytorch&logoColor=white)
-![Transformers](https://img.shields.io/badge/HuggingFace-Transformers-FFD21E?logo=huggingface&logoColor=black)
-![License](https://img.shields.io/badge/License-MIT-green)
+A production-ready AI-powered content moderation platform built with **FastAPI**, **Next.js 16**, **React 19**, and **TypeScript**. The application performs real-time moderation of user-generated text using a transformer-based **ToxicBERT** model, providing confidence scores, explainable moderation categories, and structured risk assessment through a modern full-stack architecture.
+
+---
+
+## Live Project
+
+| Resource | Link |
+| -------- | ---- |
+| GitHub Repository | <https://github.com/srikco06-ai/ai-content-moderation-engine> |
+| Frontend Demo | <https://your-vercel-app.vercel.app> |
+| Backend API Documentation | <https://your-backend-domain/docs> |
+| Portfolio | <https://srikco06-ai.vercel.app/> |
+| LinkedIn | <https://www.linkedin.com/in/sri-krishna-chaitanya-ogirala-2522b660/> |
 
 ---
 
 ## Overview
 
-AI Content Moderation Engine is a production-oriented full-stack AI application that performs intelligent text moderation using a transformer-based ToxicBERT model.
+The AI Content Moderation Engine is a production-oriented full-stack application that demonstrates modern AI application development using contemporary frontend and backend technologies.
 
-The application combines a modern Next.js frontend with a FastAPI backend to deliver fast, accurate, and explainable moderation results through a clean REST API and responsive user interface.
+The project accepts user-submitted text, performs AI-powered toxicity analysis using a transformer model, and returns structured moderation results including prediction confidence, calculated risk score, moderation categories, and explainable prediction outputs.
 
-Rather than relying on keyword-based filtering, the backend performs contextual inference using a pretrained transformer model capable of identifying multiple forms of toxic language.
-
-The project has been engineered with production software practices including modular architecture, automated testing, configuration management, structured logging, comprehensive validation, and maintainable documentation.
+Rather than serving as a simple machine learning demonstration, the project is structured as a production-quality software system featuring modular architecture, REST API design, responsive frontend development, validation, testing, documentation, and deployment readiness.
 
 ---
 
@@ -30,116 +38,119 @@ The project has been engineered with production software practices including mod
 ### AI Moderation
 
 - Transformer-based ToxicBERT inference
-- Multi-label toxicity detection
-- Confidence scoring
-- Risk score calculation
-- Toxic category identification
-- Configurable moderation threshold
-- Text preprocessing pipeline
-- Structured JSON responses
+- Real-time text moderation
+- Toxic vs Safe prediction
+- Confidence score calculation
+- Risk score estimation
+- Explainable moderation results
+- Toxic category detection
+- Raw model probability outputs
+
+---
 
 ### Backend
 
 - FastAPI REST API
-- Pydantic v2 validation
-- Centralized configuration
-- Production logging
-- Global exception handling
-- OpenAPI specification
-- Interactive Swagger UI
+- Modular service architecture
+- Request validation
+- Structured JSON responses
+- Automatic OpenAPI documentation
+- Swagger UI
 - Health monitoring endpoint
-- Lazy model initialization
-- Thread-safe inference engine
+- Environment-based configuration
+- Production logging
+- Centralized exception handling
+
+---
 
 ### Frontend
 
 - Next.js 16 App Router
 - React 19
 - TypeScript
-- Tailwind CSS
-- Responsive interface
-- FastAPI integration
-- Loading and error states
-- Modern component architecture
+- Responsive dashboard
+- Real-time moderation workflow
+- Moderation history
+- Search and filtering
+- CSV export
+- Reusable UI components
+- Loading and error handling
+
+---
 
 ### Engineering Quality
 
-- Modular architecture
-- Environment-based configuration
-- Type-safe implementation
+- Production-ready architecture
+- Clean project organization
+- Type-safe development
+- Modular components
 - Automated testing
-- Code formatting
-- Static analysis
-- Production-ready repository structure
+- API validation
+- Documentation
+- Environment configuration
+- Deployment ready
+- GitHub portfolio ready
 
 ---
 
 ## Technology Stack
 
-| Layer | Technologies |
-| ----- | ------------ |
-| Frontend | Next.js 16, React 19, TypeScript, Tailwind CSS |
-| Backend | FastAPI, Uvicorn, Pydantic v2 |
-| AI | Hugging Face Transformers, ToxicBERT, PyTorch |
+| Category | Technology |
+| -------- | ---------- |
+| Frontend | Next.js 16 |
+| UI Library | React 19 |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| Backend | FastAPI |
+| AI Model | Unitary ToxicBERT |
+| Machine Learning | Hugging Face Transformers |
+| Deep Learning | PyTorch |
 | Validation | Pydantic |
+| API Documentation | OpenAPI / Swagger |
 | Testing | Pytest |
-| Code Quality | Black, Ruff |
-| Package Managers | npm, pip |
-| Version Control | Git, GitHub |
+| Code Quality | Ruff, Black, isort |
+| Version Control | Git & GitHub |
 
 ---
 
-## Why This Project?
+## System Architecture
 
-Online platforms process enormous volumes of user-generated content every day.
-
-Traditional keyword filtering approaches are often inaccurate because they cannot understand context.
-
-This project demonstrates how modern transformer models can be integrated into a production-ready web application that performs contextual content moderation while exposing a clean API suitable for real-world integration.
-
-The repository has been developed as a portfolio-quality software engineering project that demonstrates:
-
-- AI model integration
-- Full-stack application development
-- REST API design
-- Production backend architecture
-- Frontend-backend communication
-- Automated testing
-- Software quality practices
-- Clean project organization
-
----
-
-## High-Level Architecture
+The AI Content Moderation Engine follows a modular client-server architecture that separates the presentation layer, API layer, business logic, and AI inference engine. This separation improves maintainability, scalability, testability, and deployment flexibility.
 
 ```text
-                    User
-                      │
-                      ▼
-         Next.js 16 + React Frontend
-                      │
-               REST API Requests
-                      │
-                      ▼
-              FastAPI Application
-                      │
-        Request Validation (Pydantic)
-                      │
-                      ▼
-            Text Preprocessing
-                      │
-                      ▼
-         ToxicBERT Inference Engine
-                      │
-                      ▼
-      Hugging Face Transformer Model
-                      │
-                      ▼
-      Business Logic & Risk Analysis
-                      │
-                      ▼
-           Structured JSON Response
+                        User
+                          │
+                          ▼
+               Next.js 16 Frontend
+                          │
+             HTTPS / REST API Requests
+                          │
+                          ▼
+                  FastAPI Backend
+                          │
+          Request Validation (Pydantic)
+                          │
+                          ▼
+              Moderation Service Layer
+                          │
+          Text Preprocessing Pipeline
+                          │
+                          ▼
+            Transformer-based ToxicBERT
+                          │
+                Prediction Processing
+                          │
+                          ▼
+          Confidence & Risk Calculation
+                          │
+                          ▼
+               Structured JSON Response
+                          │
+                          ▼
+               Results Dashboard (UI)
 ```
+
+The frontend and backend communicate exclusively through REST APIs, allowing each application to evolve independently while maintaining a clean contract between services.
 
 ---
 
@@ -147,8 +158,7 @@ The repository has been developed as a portfolio-quality software engineering pr
 
 ```text
 ai-content-moderation-engine/
-├── .github/
-│   └── workflows/
+│
 ├── backend/
 │   ├── app/
 │   │   ├── config.py
@@ -157,55 +167,206 @@ ai-content-moderation-engine/
 │   │   ├── preprocessing.py
 │   │   ├── schemas.py
 │   │   ├── services.py
-│   │   └── toxicbert_engine.py
+│   │   ├── toxicbert_engine.py
+│   │   └── ...
+│   │
 │   ├── tests/
 │   │   ├── api/
-│   │   ├── infrastructure/
 │   │   ├── integration/
-│   │   ├── services/
-│   │   └── validation/
-│   ├── .env.example
+│   │   ├── infrastructure/
+│   │   ├── validation/
+│   │   └── services/
+│   │
 │   ├── requirements.txt
-│   └── main.py
+│   ├── .env.example
+│   └── README.md
+│
 ├── frontend/
 │   ├── app/
 │   ├── components/
+│   ├── hooks/
 │   ├── lib/
 │   ├── public/
 │   ├── types/
-│   ├── utils/
-│   └── package.json
-├── .gitignore
+│   ├── package.json
+│   └── README.md
+│
+├── screenshots/
 ├── LICENSE
 └── README.md
 ```
 
-The repository is organized into independent frontend and backend applications while maintaining a unified development workflow. This separation allows each component to evolve independently while communicating through a well-defined REST API.
+The repository is organized using a feature-oriented structure that separates frontend, backend, documentation, tests, and deployment assets into clearly defined modules.
 
 ---
 
-## Quick Start
+## Application Workflow
 
-### Prerequisites
+A moderation request follows the sequence below.
 
-Install the following software before running the project:
+1. The user enters text through the Next.js frontend.
+2. Client-side validation checks the request.
+3. The frontend submits a POST request to the FastAPI backend.
+4. FastAPI validates the request using Pydantic models.
+5. The moderation service preprocesses the submitted text.
+6. ToxicBERT performs transformer inference.
+7. Prediction probabilities are processed into moderation results.
+8. Confidence score and risk score are calculated.
+9. A structured JSON response is returned.
+10. The frontend renders the moderation dashboard and updates the moderation history.
 
-- Python 3.12 or later
-- Node.js 20 or later
-- npm
-- Git
+This workflow keeps AI inference isolated from presentation logic while providing a responsive user experience.
+
+---
+
+## Backend Architecture
+
+The backend follows a layered architecture that separates API routing, validation, business logic, AI inference, configuration, and infrastructure concerns.
+
+```text
+HTTP Request
+      │
+      ▼
+FastAPI Router
+      │
+      ▼
+Pydantic Validation
+      │
+      ▼
+Moderation Service
+      │
+      ▼
+Text Preprocessing
+      │
+      ▼
+ToxicBERT Inference
+      │
+      ▼
+Prediction Processing
+      │
+      ▼
+Risk Assessment
+      │
+      ▼
+JSON Response
+```
+
+Each layer has a single responsibility, making the backend easier to maintain, extend, and test.
+
+---
+
+## Frontend Architecture
+
+The frontend is built using the Next.js App Router and reusable React components.
+
+```text
+Browser
+    │
+    ▼
+Next.js App Router
+    │
+    ▼
+Page Components
+    │
+    ▼
+Reusable UI Components
+    │
+    ▼
+Custom Hooks
+    │
+    ▼
+API Client
+    │
+    ▼
+FastAPI Backend
+```
+
+Application state is managed using React Hooks and local component state, avoiding unnecessary global state libraries while keeping the implementation simple and maintainable.
+
+---
+
+## AI Moderation Pipeline
+
+The moderation engine processes submitted text through multiple stages before generating the final prediction.
+
+```text
+Raw Text
+    │
+    ▼
+Input Validation
+    │
+    ▼
+Text Preprocessing
+    │
+    ▼
+Tokenizer
+    │
+    ▼
+Transformer (ToxicBERT)
+    │
+    ▼
+Raw Prediction Scores
+    │
+    ▼
+Confidence Calculation
+    │
+    ▼
+Risk Score Calculation
+    │
+    ▼
+Category Extraction
+    │
+    ▼
+Structured Response
+```
+
+This pipeline separates preprocessing, model inference, and response generation, allowing each stage to be tested and improved independently.
+
+---
+
+## Design Principles
+
+The project was developed using several software engineering principles.
+
+- Separation of concerns
+- Modular architecture
+- Reusable components
+- Type-safe development
+- REST-first API design
+- Environment-based configuration
+- Production-oriented project structure
+- Automated validation and testing
+- Maintainable code organization
+- Deployment readiness
+
+---
+
+## Getting Started
+
+Follow the steps below to set up the project locally for development.
+
+---
+
+## Prerequisites
+
+Before running the project, ensure the following software is installed:
+
+| Software | Version |
+| -------- | ------- |
+| Python | 3.12 or later |
+| Node.js | 20 or later |
+| npm | Latest |
+| Git | Latest |
 
 ---
 
 ## Clone the Repository
 
 ```bash
-git clone https://github.com/<your-username>/ai-content-moderation-engine.git
+git clone https://github.com/srikco06-ai/ai-content-moderation-engine.git
 
 cd ai-content-moderation-engine
 ```
-
-Replace `<your-username>` with your GitHub username.
 
 ---
 
@@ -219,7 +380,7 @@ cd backend
 
 Create a virtual environment.
 
-### Windows
+## Windows
 
 ```bash
 python -m venv .venv
@@ -227,17 +388,25 @@ python -m venv .venv
 
 Activate the virtual environment.
 
+### PowerShell
+
 ```powershell
 .venv\Scripts\Activate.ps1
+```
+
+### Command Prompt
+
+```cmd
+.venv\Scripts\activate.bat
 ```
 
 ### macOS / Linux
 
 ```bash
-python3 -m venv .venv
-
 source .venv/bin/activate
 ```
+
+---
 
 Install the required dependencies.
 
@@ -245,31 +414,46 @@ Install the required dependencies.
 pip install -r requirements.txt
 ```
 
-Verify that all installed packages are compatible.
+---
 
-```bash
-pip check
+## Backend Environment Variables
+
+Create a `.env` file inside the backend directory.
+
+Example configuration:
+
+```env
+HOST=0.0.0.0
+PORT=8000
+LOG_LEVEL=INFO
+HF_TOKEN=your_huggingface_token_optional
 ```
 
-Start the FastAPI development server.
+The Hugging Face token is optional but recommended to avoid anonymous download rate limits when retrieving model files.
+
+---
+
+## Start the Backend
+
+Run the FastAPI development server.
 
 ```bash
 uvicorn main:app --reload
 ```
 
-Once the application starts successfully, the backend will be available at:
+The backend will be available at:
 
 ```text
 http://localhost:8000
 ```
 
-Interactive API documentation:
+Swagger UI:
 
 ```text
 http://localhost:8000/docs
 ```
 
-OpenAPI specification:
+OpenAPI Schema:
 
 ```text
 http://localhost:8000/openapi.json
@@ -279,7 +463,7 @@ http://localhost:8000/openapi.json
 
 ## Frontend Setup
 
-Open a new terminal.
+Open a second terminal.
 
 Navigate to the frontend directory.
 
@@ -287,25 +471,29 @@ Navigate to the frontend directory.
 cd frontend
 ```
 
-Install the project dependencies.
+Install project dependencies.
 
 ```bash
 npm install
 ```
 
-Create a local environment file named:
+---
 
-```text
-.env.local
-```
+## Frontend Environment Variables
 
-Add the backend API URL.
+Create a `.env.local` file.
+
+Example configuration:
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:8000
 ```
 
-Start the development server.
+---
+
+### Start the Frontend
+
+Run the Next.js development server.
 
 ```bash
 npm run dev
@@ -317,12 +505,6 @@ The frontend will be available at:
 http://localhost:3000
 ```
 
-During development:
-
-- Frontend requests are sent to the FastAPI backend.
-- Moderation results are returned as structured JSON.
-- The interface updates dynamically based on API responses.
-
 ---
 
 ## Running the Complete Application
@@ -331,89 +513,128 @@ Start the backend first.
 
 ```bash
 cd backend
-
 uvicorn main:app --reload
 ```
 
-Open a second terminal and start the frontend.
+Open another terminal.
 
 ```bash
 cd frontend
-
 npm run dev
 ```
 
-Then open your browser.
+Visit:
 
 ```text
-Frontend
 http://localhost:3000
-
-Backend
-http://localhost:8000
-
-Swagger UI
-http://localhost:8000/docs
 ```
 
-The frontend communicates with the backend through REST API requests. The backend performs text preprocessing, runs ToxicBERT inference, calculates moderation metrics, and returns structured results for presentation in the user interface.
+Submit text through the moderation interface to verify communication between the frontend and backend.
 
 ---
 
-## Environment Variables
+## Development Commands
 
-The backend is configured through environment variables to simplify local development and production deployments.
+### Backend Commands
 
-### Backend (`backend/.env`)
+Install dependencies.
 
-```env
-APP_NAME=AI Content Moderation API
-APP_VERSION=1.0.0
-DEBUG=True
-
-API_PREFIX=
-
-ALLOW_CREDENTIALS=True
-ALLOW_ORIGINS=*
-ALLOW_METHODS=*
-ALLOW_HEADERS=*
+```bash
+pip install -r requirements.txt
 ```
 
-For production deployments:
+Run the application.
 
-- Disable debug mode.
-- Restrict allowed origins.
-- Store secrets using the deployment platform's environment configuration.
+```bash
+uvicorn main:app --reload
+```
+
+Run tests.
+
+```bash
+pytest
+```
+
+Run with coverage.
+
+```bash
+pytest --cov
+```
+
+Format code.
+
+```bash
+black .
+```
+
+Sort imports.
+
+```bash
+isort .
+```
+
+Run linting.
+
+```bash
+ruff check .
+```
 
 ---
 
-### Frontend (`frontend/.env.local`)
+### Frontend Commands
 
-```env
-NEXT_PUBLIC_API_URL=http://localhost:8000
+Install dependencies.
+
+```bash
+npm install
 ```
 
-Update this value to your deployed backend URL before deploying the frontend.
+Start development.
+
+```bash
+npm run dev
+```
+
+Run ESLint.
+
+```bash
+npm run lint
+```
+
+Create a production build.
+
+```bash
+npm run build
+```
+
+Run the production server.
+
+```bash
+npm start
+```
 
 ---
 
-## REST API Overview
+## API Documentation
 
-The backend exposes a small, focused REST API.
+FastAPI automatically generates interactive API documentation.
 
-| Method | Endpoint | Purpose |
-| ------- | -------- | ------ |
-| GET | `/` | Service information |
-| GET | `/health` | Health check |
+| Resource | URL |
+| -------- | --- |
+| Swagger UI | <http://localhost:8000/docs> |
+| OpenAPI JSON | <http://localhost:8000/openapi.json> |
+
+The API exposes the following endpoints.
+
+| Method | Endpoint | Description |
+| -------- | ------ | ----------- |
+| GET | `/` | API information |
+| GET | `/health` | Health status |
 | POST | `/predict` | Analyze submitted text |
 
-The API returns structured JSON responses designed for frontend integration and third-party clients.
-
 ---
 
-## Prediction Endpoint
-
-### Request
+## Example API Request
 
 ```http
 POST /predict
@@ -422,274 +643,262 @@ Content-Type: application/json
 
 ```json
 {
-  "text": "You are amazing. Thank you for your support."
+  "text": "You are amazing."
 }
 ```
 
 ---
 
-### Successful Response
+## Example API Response
 
 ```json
 {
   "prediction": "Safe",
-  "confidence": 99.81,
-  "risk_score": 0.19,
+  "confidence": 99.92,
+  "risk_score": 0.08,
   "matched_words": [],
   "categories": [],
   "raw_predictions": {
-    "toxic": 0.0012,
-    "insult": 0.0008,
-    "threat": 0.0001
+    "toxic": 0.0008,
+    "severe_toxic": 0.0001,
+    "obscene": 0.0002,
+    "threat": 0.0000,
+    "insult": 0.0003,
+    "identity_hate": 0.0000
   }
 }
 ```
 
-The exact confidence values and category probabilities depend on the ToxicBERT model's inference results.
-
 ---
 
-## Health Endpoint
+## Production Build
 
-```http
-GET /health
-```
-
-Example response:
-
-```json
-{
-  "status": "healthy",
-  "service_ready": true,
-  "version": "1.0.0"
-}
-```
-
-This endpoint can be used by deployment platforms, monitoring systems, and load balancers to verify service availability.
-
----
-
-## API Documentation
-
-FastAPI automatically generates interactive API documentation.
-
-| Documentation | URL |
-| ------------- | --- |
-| Swagger UI | `http://localhost:8000/docs` |
-| OpenAPI Specification | `http://localhost:8000/openapi.json` |
-
-These endpoints are useful during development, testing, and API integration.
-
----
-
-## Testing & Code Quality
-
-The backend follows a quality-first development workflow.
-
-### Automated Testing
-
-The project includes automated tests covering:
-
-- API endpoints
-- Request validation
-- Moderation service
-- Integration workflows
-- Configuration
-- Logging
-- Exception handling
-
-Current backend status:
-
-- 66 automated tests passing
-
----
-
-### Code Formatting
-
-Source code is formatted using Black.
+### Frontend Build Commands
 
 ```bash
-black backend
+npm run build
+npm start
 ```
 
----
-
-### Static Analysis
-
-Linting is performed using Ruff.
+### Backend Build Commands
 
 ```bash
-ruff check backend
+uvicorn main:app
 ```
+
+The application is designed for production deployment with separate frontend and backend services.
 
 ---
 
-### Bytecode Compilation
+## Testing
 
-Compile all Python modules to verify syntax.
+The project includes automated tests covering API endpoints, service logic, validation, configuration, and integration workflows.
 
-```bash
-python -m compileall backend
-```
+### Backend Tests
 
----
-
-### Dependency Verification
-
-Verify installed packages.
-
-```bash
-pip check
-```
-
----
-
-### Running the Test Suite
-
-Execute the complete backend test suite.
+Run all tests:
 
 ```bash
 pytest
 ```
 
-For test coverage:
+Run with coverage:
 
 ```bash
-pytest --cov=app
+pytest --cov
 ```
 
-These quality checks are intended to help maintain code reliability and catch issues before deployment.
+The test suite covers:
+
+- API endpoint validation
+- Health endpoint verification
+- Prediction endpoint testing
+- Request validation
+- Service layer testing
+- Configuration loading
+- Exception handling
+- Integration workflow testing
 
 ---
 
-## Project Highlights
+## Code Quality
 
-This project demonstrates practical software engineering practices beyond implementing a machine learning model.
+The project follows modern Python and TypeScript development practices.
 
-Highlights include:
+### Python
 
-- Production-oriented FastAPI backend
-- Transformer-based ToxicBERT inference
-- Modern Next.js frontend
-- RESTful API architecture
-- Centralized configuration management
-- Comprehensive request validation
-- Structured logging
-- Global exception handling
-- Strong type safety using Pydantic v2 and TypeScript
-- Automated testing across multiple layers
-- Clean repository organization
-- Environment-based configuration
-- Production-ready project structure
+Formatting:
 
-The repository has been designed to serve as both a portfolio project and a foundation for future enhancements.
+```bash
+black .
+```
+
+Import sorting:
+
+```bash
+isort .
+```
+
+Linting:
+
+```bash
+ruff check .
+```
+
+### Frontend Lint Commands
+
+Linting:
+
+```bash
+npm run lint
+```
+
+Production build verification:
+
+```bash
+npm run build
+```
+
+These tools help maintain consistent code quality and reduce defects before deployment.
+
+---
+
+## Deployment
+
+The frontend and backend are designed to be deployed independently.
+
+### Frontend Deployment
+
+Recommended platform:
+
+- Vercel
+
+Required environment variable:
+
+```env
+NEXT_PUBLIC_API_URL=<backend-url>
+```
+
+---
+
+### Backend Deployment
+
+Compatible with platforms such as:
+
+- Render
+- Railway
+- Azure App Service
+- DigitalOcean App Platform
+- Docker-based deployments
+
+Example production command:
+
+```bash
+uvicorn main:app --host 0.0.0.0 --port 8000
+```
 
 ---
 
 ## Screenshots
 
-Screenshots will be added after the frontend deployment is finalized.
+The repository includes screenshots demonstrating the application interface.
 
-Suggested screenshots include:
+- Homepage
+- Moderation Dashboard
+- Toxic Content Detection
+- Safe Content Detection
+- Swagger API Documentation
 
-- Home page
-- Text moderation interface
-- Prediction results
-- Swagger UI
-- Health endpoint
-- Responsive mobile layout
+Screenshots will be added after the production deployment is complete.
 
 ---
 
-## Future Roadmap
-
-The current version focuses on transformer-based text moderation.
+## Future Improvements
 
 Potential future enhancements include:
 
-- User authentication
-- Persistent moderation history
-- Database integration
-- User dashboard
-- Image moderation
+- User authentication and authorization
+- Role-based access control (RBAC)
+- Moderation analytics dashboard
+- Persistent database storage
+- Batch moderation API
+- Asynchronous inference queue
 - Multi-language moderation
-- Batch moderation requests
-- Analytics dashboard
-- Docker containerization
-- Continuous deployment pipeline
-- Cloud-native deployment
-- Role-based access control
+- Model version management
+- Streaming API support
+- Docker and Kubernetes deployment
+- CI/CD pipeline automation
+- Rate limiting and API key management
+- Admin moderation console
+- Explainability visualizations
+- Additional transformer model support
 
 ---
 
-## Documentation
+## Project Highlights
 
-Additional documentation is available within the repository.
+This project demonstrates practical experience in:
 
-| Document | Description |
-| -------- | ----------- |
-| `backend/README.md` | Backend architecture, configuration, deployment, and API details |
-| `frontend/README.md` | Frontend architecture, development workflow, and deployment |
-| `LICENSE` | Project license |
-
----
-
-## Contributing
-
-Contributions are welcome.
-
-If you would like to contribute:
-
-- Fork the repository.
-- Create a feature branch.
-
-```bash
-git checkout -b feature/your-feature
-```
-
-- Commit your changes.
-
-```bash
-git commit -m "Add your feature"
-```
-
-- Push the branch.
-
-```bash
-git push origin feature/your-feature
-```
-
-- Open a Pull Request.
-
-Please ensure that:
-
-- Code follows the existing style.
-- Tests continue to pass.
-- Documentation is updated where necessary.
+- AI application development
+- Transformer model integration
+- FastAPI backend engineering
+- Next.js full-stack development
+- REST API design
+- Type-safe frontend development
+- Production-oriented architecture
+- Automated testing
+- Documentation
+- Deployment readiness
+- Git and GitHub workflows
 
 ---
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
 
-See the `LICENSE` file for additional information.
+See the [LICENSE](LICENSE) file for details.
+
+---
+
+## Author
+
+### Sri Krishna Chaitanya Ogirala
+
+AI & Machine Learning Engineer | Full-Stack AI Developer
+
+- GitHub: <https://github.com/srikco06-ai>
+- LinkedIn: <https://www.linkedin.com/in/sri-krishna-chaitanya-ogirala-2522b660/>
+- Portfolio: <https://srikco06-ai.vercel.app/>
 
 ---
 
 ## Acknowledgements
 
-This project makes use of several outstanding open-source technologies, including:
+This project is built using several outstanding open-source technologies.
 
 - FastAPI
 - Next.js
 - React
 - TypeScript
+- Tailwind CSS
 - Hugging Face Transformers
 - PyTorch
-- Tailwind CSS
 - Pydantic
-- Uvicorn
-- Pytest
 
-Their contributions to the open-source ecosystem make projects like this possible.
+Their communities and maintainers continue to make modern AI application development faster, more reliable, and more accessible.
+
+---
+
+## Support
+
+If you found this repository useful:
+
+- ⭐ Star the repository
+- 🍴 Fork the project
+- 💡 Open an issue for bugs or feature requests
+- 🤝 Submit a pull request with improvements
+
+---
+
+**Built with ❤️ using FastAPI, Next.js, React, TypeScript, and Transformer-based AI.**
