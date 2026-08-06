@@ -2,6 +2,11 @@
 Request validation tests.
 """
 
+from __future__ import annotations
+
+from typing import Any
+
+import pytest
 from fastapi.testclient import TestClient
 
 
@@ -10,96 +15,30 @@ class TestRequestValidation:
     Tests for request body validation.
     """
 
-    def test_missing_text_field(
+    @pytest.mark.parametrize(
+        "payload",
+        [
+            {},
+            {"text": ""},
+            {"text": "      "},
+            {"text": None},
+            {"text": 12345},
+            {"text": ["hello"]},
+            {"text": {"value": "hello"}},
+        ],
+    )
+    def test_invalid_requests_return_422(
         self,
         client: TestClient,
+        payload: dict[str, Any],
     ) -> None:
-        """Missing text field should return 422."""
+        """
+        Invalid payloads should return HTTP 422.
+        """
 
         response = client.post(
             "/predict",
-            json={},
-        )
-
-        assert response.status_code == 422
-
-        data = response.json()
-
-        assert "detail" in data
-
-    def test_empty_text(
-        self,
-        client: TestClient,
-    ) -> None:
-        """Empty text should fail validation."""
-
-        response = client.post(
-            "/predict",
-            json={
-                "text": ""
-            },
-        )
-
-        assert response.status_code == 422
-
-    def test_null_text(
-        self,
-        client: TestClient,
-    ) -> None:
-        """Null text should fail validation."""
-
-        response = client.post(
-            "/predict",
-            json={
-                "text": None
-            },
-        )
-
-        assert response.status_code == 422
-
-    def test_integer_text(
-        self,
-        client: TestClient,
-    ) -> None:
-        """Integer text should fail validation."""
-
-        response = client.post(
-            "/predict",
-            json={
-                "text": 12345
-            },
-        )
-
-        assert response.status_code == 422
-
-    def test_list_text(
-        self,
-        client: TestClient,
-    ) -> None:
-        """List should fail validation."""
-
-        response = client.post(
-            "/predict",
-            json={
-                "text": ["hello"]
-            },
-        )
-
-        assert response.status_code == 422
-
-    def test_dictionary_text(
-        self,
-        client: TestClient,
-    ) -> None:
-        """Dictionary should fail validation."""
-
-        response = client.post(
-            "/predict",
-            json={
-                "text": {
-                    "value": "hello"
-                }
-            },
+            json=payload,
         )
 
         assert response.status_code == 422
@@ -108,24 +47,37 @@ class TestRequestValidation:
         self,
         client: TestClient,
     ) -> None:
-        """Validation response should contain detail."""
+        """
+        Validation response should contain a detail list.
+        """
 
         response = client.post(
             "/predict",
             json={},
         )
 
+        assert response.status_code == 422
+
         data = response.json()
 
-        assert response.status_code == 422
+        assert isinstance(data, dict)
+
         assert "detail" in data
-        assert isinstance(data["detail"], list)
+
+        assert isinstance(
+            data["detail"],
+            list,
+        )
+
+        assert len(data["detail"]) > 0
 
     def test_validation_error_location(
         self,
         client: TestClient,
     ) -> None:
-        """Validation error should reference the text field."""
+        """
+        Validation error should reference the text field.
+        """
 
         response = client.post(
             "/predict",
@@ -137,4 +89,55 @@ class TestRequestValidation:
         first_error = data["detail"][0]
 
         assert "loc" in first_error
+
         assert first_error["loc"][-1] == "text"
+
+    def test_validation_error_contains_message(
+        self,
+        client: TestClient,
+    ) -> None:
+        """
+        Validation error should include a readable message.
+        """
+
+        response = client.post(
+            "/predict",
+            json={},
+        )
+
+        data = response.json()
+
+        first_error = data["detail"][0]
+
+        assert "msg" in first_error
+
+        assert isinstance(
+            first_error["msg"],
+            str,
+        )
+
+        assert len(first_error["msg"]) > 0
+
+    def test_validation_error_contains_type(
+        self,
+        client: TestClient,
+    ) -> None:
+        """
+        Validation error should include an error type.
+        """
+
+        response = client.post(
+            "/predict",
+            json={},
+        )
+
+        data = response.json()
+
+        first_error = data["detail"][0]
+
+        assert "type" in first_error
+
+        assert isinstance(
+            first_error["type"],
+            str,
+        )

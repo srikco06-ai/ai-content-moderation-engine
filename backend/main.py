@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -10,11 +14,36 @@ from app.schemas import (
     TextInput,
 )
 from app.services import predict_text
-
+from app.toxicbert_engine import get_engine
 
 configure_logging()
 
 logger = get_logger(__name__)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """
+    Application lifespan.
+
+    Warms up the ToxicBERT model during startup so the first
+    prediction request does not incur model loading latency.
+    """
+
+    logger.info("Application startup initiated.")
+
+    try:
+        get_engine().warmup()
+
+        logger.info("ToxicBERT warmup completed successfully.")
+
+    except Exception:
+        logger.exception("Failed to warm up ToxicBERT.")
+        raise
+
+    yield
+
+    logger.info("Application shutdown complete.")
 
 
 app = FastAPI(
@@ -22,9 +51,10 @@ app = FastAPI(
     description=(
         "Production-ready REST API for AI-powered content moderation. "
         "Detects toxic, abusive, hateful, and offensive text using "
-        "machine learning and rule-based analysis."
+        "a transformer-based ToxicBERT model."
     ),
     version=settings.APP_VERSION,
+    lifespan=lifespan,
 )
 
 logger.info(
@@ -49,11 +79,15 @@ register_exception_handlers(app)
     tags=["Health"],
     summary="API Status",
 )
-def home():
+def home() -> dict[str, str]:
+    """
+    Root endpoint.
+    """
+
     logger.debug("Root endpoint requested.")
 
     return {
-        "message": f"{settings.APP_NAME} Running"
+        "message": f"{settings.APP_NAME} Running",
     }
 
 
@@ -63,7 +97,11 @@ def home():
     tags=["Health"],
     summary="Health Check",
 )
-def health():
+def health() -> HealthResponse:
+    """
+    Health check endpoint.
+    """
+
     logger.debug("Health check requested.")
 
     return {
@@ -79,7 +117,13 @@ def health():
     tags=["Prediction"],
     summary="Analyze Text",
 )
-def predict(data: TextInput):
+def predict(
+    data: TextInput,
+) -> PredictionResponse:
+    """
+    Analyze submitted text for toxicity.
+    """
+
     logger.info(
         "Prediction request received | text_length=%d",
         len(data.text),
@@ -88,10 +132,17 @@ def predict(data: TextInput):
     result = predict_text(data)
 
     logger.info(
-        "Prediction completed | prediction=%s risk_score=%.2f matches=%d",
+        (
+            "Prediction completed | "
+            "prediction=%s "
+            "confidence=%.2f "
+            "risk_score=%.2f "
+            "categories=%d"
+        ),
         result["prediction"],
+        result["confidence"],
         result["risk_score"],
-        len(result["matched_words"]),
+        len(result["categories"]),
     )
 
-    return result
+    return PredictionResponse(**result)

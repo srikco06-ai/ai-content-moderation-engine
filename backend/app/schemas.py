@@ -1,6 +1,6 @@
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class TextInput(BaseModel):
@@ -9,6 +9,20 @@ class TextInput(BaseModel):
         min_length=1,
         description="Text content to analyze for toxicity.",
     )
+
+    @field_validator("text")
+    @classmethod
+    def validate_text(cls, value: str) -> str:
+        """
+        Reject whitespace-only input.
+        """
+
+        value = value.strip()
+
+        if not value:
+            raise ValueError("Text cannot be blank.")
+
+        return value
 
 
 class PredictionResponse(BaseModel):

@@ -4,8 +4,25 @@ from fastapi.responses import JSONResponse
 
 from app.logging_config import get_logger
 
-
 logger = get_logger(__name__)
+
+
+def _serialize_validation_errors(errors: list[dict]) -> list[dict]:
+    """
+    Convert validation errors into JSON-serializable objects.
+    """
+
+    serialized = []
+
+    for error in errors:
+        error = error.copy()
+
+        if "ctx" in error:
+            error["ctx"] = {key: str(value) for key, value in error["ctx"].items()}
+
+        serialized.append(error)
+
+    return serialized
 
 
 def register_exception_handlers(app: FastAPI) -> None:
@@ -27,7 +44,7 @@ def register_exception_handlers(app: FastAPI) -> None:
         return JSONResponse(
             status_code=422,
             content={
-                "detail": exc.errors(),
+                "detail": _serialize_validation_errors(exc.errors()),
             },
         )
 
@@ -62,9 +79,5 @@ def register_exception_handlers(app: FastAPI) -> None:
 
         return JSONResponse(
             status_code=500,
-            content={
-                "detail": (
-                    "An unexpected internal server error occurred."
-                )
-            },
+            content={"detail": ("An unexpected internal server error occurred.")},
         )

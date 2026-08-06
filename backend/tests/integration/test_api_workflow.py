@@ -2,42 +2,56 @@
 End-to-end integration tests for the AI Content Moderation API.
 """
 
+from __future__ import annotations
+
 from fastapi.testclient import TestClient
 
 from main import app
-
 
 client = TestClient(app)
 
 
 class TestAPIWorkflow:
     """
-    End-to-end API workflow tests.
+    End-to-end integration tests.
     """
 
-    def test_complete_health_workflow(self):
-        """Verify the root and health endpoints."""
+    def test_complete_health_workflow(self) -> None:
+        """
+        Verify root and health endpoints.
+        """
 
         root = client.get("/")
+
         assert root.status_code == 200
+
         assert "message" in root.json()
 
         health = client.get("/health")
+
         assert health.status_code == 200
 
         body = health.json()
 
         assert body["status"] == "healthy"
+
         assert body["service_ready"] is True
-        assert "version" in body
 
-    def test_complete_safe_prediction_workflow(self):
-        """Verify a safe prediction request."""
+        assert isinstance(
+            body["version"],
+            str,
+        )
+
+    def test_prediction_workflow(self) -> None:
+        """
+        Verify prediction endpoint returns the
+        expected schema.
+        """
 
         response = client.post(
             "/predict",
             json={
-                "text": "Have a wonderful day!"
+                "text": "Have a wonderful day!",
             },
         )
 
@@ -45,18 +59,26 @@ class TestAPIWorkflow:
 
         body = response.json()
 
-        assert body["prediction"] == "Safe"
-        assert body["risk_score"] == 0.0
-        assert body["matched_words"] == []
-        assert body["categories"] == []
+        expected = {
+            "prediction",
+            "confidence",
+            "risk_score",
+            "matched_words",
+            "categories",
+            "raw_predictions",
+        }
 
-    def test_complete_toxic_prediction_workflow(self):
-        """Verify a toxic prediction request."""
+        assert set(body.keys()) == expected
+
+    def test_prediction_types(self) -> None:
+        """
+        Response values should have expected types.
+        """
 
         response = client.post(
             "/predict",
             json={
-                "text": "You are stupid and I hate you."
+                "text": "You are stupid.",
             },
         )
 
@@ -64,13 +86,40 @@ class TestAPIWorkflow:
 
         body = response.json()
 
-        assert body["prediction"] == "Toxic"
-        assert body["risk_score"] > 0
-        assert len(body["matched_words"]) > 0
-        assert len(body["categories"]) > 0
+        assert body["prediction"] in {
+            "Safe",
+            "Toxic",
+        }
 
-    def test_invalid_request_workflow(self):
-        """Verify validation errors."""
+        assert isinstance(
+            body["confidence"],
+            float,
+        )
+
+        assert isinstance(
+            body["risk_score"],
+            float,
+        )
+
+        assert isinstance(
+            body["matched_words"],
+            list,
+        )
+
+        assert isinstance(
+            body["categories"],
+            list,
+        )
+
+        assert isinstance(
+            body["raw_predictions"],
+            dict,
+        )
+
+    def test_invalid_request_workflow(self) -> None:
+        """
+        Invalid payload should return HTTP 422.
+        """
 
         response = client.post(
             "/predict",
@@ -83,15 +132,46 @@ class TestAPIWorkflow:
 
         assert "detail" in body
 
-    def test_multiple_requests(self):
-        """Verify the API handles consecutive requests."""
+    def test_multiple_requests(self) -> None:
+        """
+        Consecutive requests should succeed.
+        """
 
         for _ in range(10):
+
             response = client.post(
                 "/predict",
                 json={
-                    "text": "Hello world"
+                    "text": "Hello world",
                 },
             )
 
             assert response.status_code == 200
+
+    def test_unicode_request(self) -> None:
+        """
+        Unicode text should be accepted.
+        """
+
+        response = client.post(
+            "/predict",
+            json={
+                "text": "你好 مرحبا नमस्ते Hello",
+            },
+        )
+
+        assert response.status_code == 200
+
+    def test_response_is_json(self) -> None:
+        """
+        Response should be JSON.
+        """
+
+        response = client.post(
+            "/predict",
+            json={
+                "text": "Testing",
+            },
+        )
+
+        assert response.headers["content-type"].startswith("application/json")

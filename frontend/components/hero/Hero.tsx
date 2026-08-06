@@ -172,9 +172,9 @@ export default function Hero({
 
             <p className="max-w-xl text-lg leading-8 text-slate-600">
               Detect harmful, abusive, hateful, and unsafe content using a
-              production-ready AI content moderation platform powered by
-              FastAPI, Next.js 16, React 19, and a modern, scalable frontend
-              architecture.
+              transformer-based ToxicBERT moderation engine with explainable AI
+              predictions. Built with FastAPI, Next.js 16, React 19, and
+              TypeScript for scalable, real-time content analysis.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
@@ -335,11 +335,11 @@ export default function Hero({
                   <Activity className="mx-auto h-6 w-6 text-blue-600" />
 
                   <p className="mt-3 text-2xl font-bold text-slate-900">
-                    99.9%
+                   FastAPI
                   </p>
 
                   <p className="text-xs text-slate-500">
-                    API Uptime
+                    REST Framework
                   </p>
 
                 </div>
@@ -349,11 +349,11 @@ export default function Hero({
                   <Shield className="mx-auto h-6 w-6 text-green-600" />
 
                   <p className="mt-3 text-2xl font-bold text-slate-900">
-                    REST API
+                    Modular
                   </p>
 
                   <p className="text-xs text-slate-500">
-                    FastAPI Backend
+                    Clean Architecture
                   </p>
 
                 </div>

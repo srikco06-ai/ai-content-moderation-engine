@@ -2,7 +2,11 @@
 API endpoint tests for application health and status.
 """
 
+from __future__ import annotations
+
 from fastapi.testclient import TestClient
+
+from app.config import settings
 
 
 class TestRootEndpoint:
@@ -10,8 +14,13 @@ class TestRootEndpoint:
     Tests for the root endpoint.
     """
 
-    def test_root_returns_200(self, client: TestClient) -> None:
-        """Root endpoint should return HTTP 200."""
+    def test_root_returns_200(
+        self,
+        client: TestClient,
+    ) -> None:
+        """
+        Root endpoint should return HTTP 200.
+        """
 
         response = client.get("/")
 
@@ -21,15 +30,31 @@ class TestRootEndpoint:
         self,
         client: TestClient,
     ) -> None:
-        """Root endpoint should return the expected welcome message."""
+        """
+        Root endpoint should return the expected message.
+        """
 
         response = client.get("/")
 
         data = response.json()
 
         assert isinstance(data, dict)
+
         assert "message" in data
-        assert data["message"] == "AI Content Moderation API Running"
+
+        assert data["message"] == f"{settings.APP_NAME} Running"
+
+    def test_root_returns_json(
+        self,
+        client: TestClient,
+    ) -> None:
+        """
+        Root endpoint should return JSON.
+        """
+
+        response = client.get("/")
+
+        assert response.headers["content-type"].startswith("application/json")
 
 
 class TestHealthEndpoint:
@@ -37,8 +62,13 @@ class TestHealthEndpoint:
     Tests for the health endpoint.
     """
 
-    def test_health_returns_200(self, client: TestClient) -> None:
-        """Health endpoint should return HTTP 200."""
+    def test_health_returns_200(
+        self,
+        client: TestClient,
+    ) -> None:
+        """
+        Health endpoint should return HTTP 200.
+        """
 
         response = client.get("/health")
 
@@ -48,40 +78,65 @@ class TestHealthEndpoint:
         self,
         client: TestClient,
     ) -> None:
-        """Health endpoint should return all required fields."""
+        """
+        Health endpoint should return all required fields.
+        """
 
         response = client.get("/health")
 
         data = response.json()
 
-        assert isinstance(data, dict)
+        expected_fields = {
+            "status",
+            "service_ready",
+            "version",
+        }
 
-        assert "status" in data
-        assert "service_ready" in data
-        assert "version" in data
+        assert set(data.keys()) == expected_fields
 
     def test_health_status_is_healthy(
         self,
         client: TestClient,
     ) -> None:
-        """Health endpoint should report a healthy service."""
+        """
+        Health endpoint should report a healthy service.
+        """
 
         response = client.get("/health")
 
         data = response.json()
 
         assert data["status"] == "healthy"
+
         assert data["service_ready"] is True
 
     def test_health_version_is_not_empty(
         self,
         client: TestClient,
     ) -> None:
-        """API version should be present."""
+        """
+        Version should be a non-empty string.
+        """
 
         response = client.get("/health")
 
         data = response.json()
 
-        assert isinstance(data["version"], str)
+        assert isinstance(
+            data["version"],
+            str,
+        )
+
         assert len(data["version"]) > 0
+
+    def test_health_returns_json(
+        self,
+        client: TestClient,
+    ) -> None:
+        """
+        Health endpoint should return JSON.
+        """
+
+        response = client.get("/health")
+
+        assert response.headers["content-type"].startswith("application/json")
